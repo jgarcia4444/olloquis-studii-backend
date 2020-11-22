@@ -1,5 +1,13 @@
 class AppointmentsController < ApplicationController 
 
+    def index
+        puts params 
+        render :json => {
+            available: true,
+            message: "reached this"
+        }
+    end
+
     def create
         new_appointment = Appointment.create(appointment_params)
         if new_appointment.valid?
