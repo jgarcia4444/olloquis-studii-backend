@@ -1,12 +1,11 @@
 class AppointmentsController < ApplicationController 
 
-    def index
-        puts params 
-        render :json => {
-            available: true,
-            message: "reached this"
-        }
-    end
+   def show 
+    puts "params: #{params}"
+    render :json => {
+        message: "Show appointments Reached"
+    }
+   end
 
     def create
         new_appointment = Appointment.create(appointment_params)
@@ -28,7 +27,7 @@ class AppointmentsController < ApplicationController
         if appointment_for_deletion
             info_for_email_confirmation = appointment_for_deletion.except(:id, :duration, :price)
             appointment_for_deletion.destroy
-            render :json {
+            render :json => {
                 deleted: true,
                 email_info: info_for_email_confirmation
             }
