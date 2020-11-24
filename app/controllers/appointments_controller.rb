@@ -2,14 +2,19 @@ class AppointmentsController < ApplicationController
 
    def show 
         puts "params: #{params}"
-        month_num = params[:month_num]
-        day_num = params[:day_num]
+        month_num = params[:month_num].to_i
+        day_num = params[:day_num].to_i
         if month_num && day_num
             apps = Appointment.find_by_month_and_day(month_num, day_num)
-            render :json => {
-                fetched: true,
-                time_listings_by_date: apps
-            }
+            if apps
+                render :json => {
+                    fetched: true,
+                    time_listings_by_date: apps
+                }
+            else
+                
+            end
+            
         else
             render :json => {
                 message: "Error!"

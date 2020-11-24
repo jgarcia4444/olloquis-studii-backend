@@ -3,11 +3,13 @@ class Appointment < ApplicationRecord
 
 
     def self.find_by_month_and_day(month, day)
-        appointments = Appointment.find_by(:month_num => month, :day_num => day)
-        (1...7).each do |i|
-            next_day_appointments = Appointment.find_by(:month_num => month, :day_num => day + i)
-            next_day_appointments.each {|app| appointments.push(app)}
+        appointments = Appointment.find_by(:month_number => month, :day_number => day)
+        for i in 1...7
+            next_day_appointments = Appointment.find_by(:month_number => month, :day_number => day + i)
+            if next_day_appointments
+                next_day_appointments.each {|app| appointments.push(app)}
+            end
         end 
+        appointments
     end
-    return appointments
 end
