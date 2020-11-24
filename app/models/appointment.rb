@@ -2,14 +2,33 @@ class Appointment < ApplicationRecord
     validates :duration, :time_start, :day_number, :month_number, :service_name, :first_name, :last_name, :email, :price, presence: true
 
 
-    def self.find_by_month_and_day(month, day)
-        appointments = Appointment.find_by(:month_number => month, :day_number => day)
-        for i in 1...7
-            next_day_appointments = Appointment.find_by(:month_number => month, :day_number => day + i)
-            if next_day_appointments
-                next_day_appointments.each {|app| appointments.push(app)}
+    def self.find_week_of_apps(month, day)
+        apps = []
+        for i in 0...7
+            Appointment.all.each do |app|
+                if (app.month_number == month && app.day_number == day + i)
+                    apps.push(app)
+                end
             end
-        end 
-        appointments
+        end
+        apps
     end
+
+    def self.setup_apps_for_frontend(apps)
+        ordered_apps = []
+        apps.each do |app|
+            if ordered_apps.include?(app.day_number)
+                same_day_app_index = ordered_apps.index(app.day_number)
+
+                ordered_apps[same_day_app_index].push(app.time_start)
+            else
+                new_day_number = {
+                    app.day_number => [app.time_start]
+                }
+                ordered_apps.push(new_day_number)
+            end
+        end
+        ordered_apps
+    end
+
 end
