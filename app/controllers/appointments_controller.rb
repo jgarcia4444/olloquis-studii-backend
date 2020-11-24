@@ -1,10 +1,20 @@
 class AppointmentsController < ApplicationController 
 
    def show 
-    puts "params: #{params}"
-    render :json => {
-        message: "Show appointments Reached"
-    }
+        puts "params: #{params}"
+        month_num = params[:month_num]
+        day_num = params[:day_num]
+        if month_num && day_num
+            apps = Appointment.find_by_month_and_day(month_num, day_num)
+            render :json => {
+                fetched: true,
+                time_listings_by_date: apps
+            }
+        else
+            render :json => {
+                message: "Error!"
+            }
+        end
    end
 
     def create
