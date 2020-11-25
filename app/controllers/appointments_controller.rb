@@ -6,9 +6,7 @@ class AppointmentsController < ApplicationController
         day_num = params[:day_num].to_i
         if month_num && day_num
             apps = Appointment.find_week_of_apps(month_num, day_num)
-            puts "The apps should be here #{apps}"
             if apps
-                appointment_times = [6, 8, 10, 12, 2, 4]
                 ordered_apps = Appointment.setup_apps_for_frontend(apps)
                 render :json => {
                     fetched: true,

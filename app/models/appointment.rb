@@ -15,17 +15,13 @@ class Appointment < ApplicationRecord
     end
 
     def self.setup_apps_for_frontend(apps)
-        ordered_apps = []
+        puts "Hola we are here!!!"
+        ordered_apps = {}
         apps.each do |app|
-            if ordered_apps.include?(app.day_number)
-                same_day_app_index = ordered_apps.index(app.day_number)
-
-                ordered_apps[same_day_app_index].push(app.time_start)
+            if ordered_apps[app.day_number]
+                ordered_apps[app.day_number].push(app.time_start)
             else
-                new_day_number = {
-                    app.day_number => [app.time_start]
-                }
-                ordered_apps.push(new_day_number)
+                ordered_apps[app.day_number] = [app.time_start]
             end
         end
         ordered_apps
