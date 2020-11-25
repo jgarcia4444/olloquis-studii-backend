@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
+Appointment.destroy_all
 
 apps = [
     {
@@ -55,7 +55,7 @@ apps = [
     {
         month_number: 10,
         day_number: 24,
-        time_start: 2,
+        time_start: 14,
         duration: 120,
         service_name: "Full Lash Set",
         first_name: "Test",
@@ -66,7 +66,7 @@ apps = [
     {
         month_number: 10,
         day_number: 24,
-        time_start: 4,
+        time_start: 16,
         duration: 120,
         service_name: "Full Lash Set",
         first_name: "Test",
@@ -74,6 +74,39 @@ apps = [
         email: "test@user.com",
         price: 120
     },
+    {
+        month_number: 10,
+        day_number: 25,
+        time_start: 6,
+        duration: 120,
+        service_name: "Full Lash Set",
+        first_name: "Test",
+        last_name: "User",
+        email: "test@user.com",
+        price: 120
+    },
+    {
+        month_number: 10,
+        day_number: 25,
+        time_start: 8,
+        duration: 120,
+        service_name: "Full Lash Set",
+        first_name: "Test",
+        last_name: "User",
+        email: "test@user.com",
+        price: 120
+    },
+    {
+        month_number: 10,
+        day_number: 25,
+        time_start: 10,
+        duration: 120,
+        service_name: "Full Lash Set",
+        first_name: "Test",
+        last_name: "User",
+        email: "test@user.com",
+        price: 120
+    }
 ]
 
 Appointment.create(apps)
