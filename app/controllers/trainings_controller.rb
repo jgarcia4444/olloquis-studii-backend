@@ -2,7 +2,13 @@ class TrainingsController < ApplicationController
 
 
     def create
-        puts params        
+        puts params    
+        new_signup = Training.create(training_params)
+        if new_signup.valid?
+            render :json => {success: true}
+        else 
+            render :json => {success: false}
+        end    
     end
 
     private 
