@@ -1,0 +1,2 @@
+class TrainingConfirmationEmailMailer < ApplicationMailer
+end

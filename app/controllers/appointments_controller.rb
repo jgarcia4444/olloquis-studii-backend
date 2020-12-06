@@ -29,6 +29,7 @@ class AppointmentsController < ApplicationController
     def create
         new_appointment = Appointment.create(appointment_params)
         if new_appointment.valid?
+            AppointmentConfirmationMailer.with(appointment: new_appointment).appointment_confirmation.deliver_now
             render :json => {
                 has_error: false,
                 appointment_info: new_appointment
